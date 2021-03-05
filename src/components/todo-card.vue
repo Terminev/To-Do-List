@@ -9,37 +9,40 @@
             <h2 v-else>{{ addition }} tâche</h2>
         </div>
         <div class="card-content">
-            <new-todo @counter=count @sendTask='Add' ></new-todo>
-            <todo-list :task="task" @endtask='End' @deletetask ='Del' @deleteall ='DelA'></todo-list>
+            <new-todo @sendTask='Add'></new-todo>
+            <todo-list :task="task" @endtask='End' @deletetask='Del' @deleteall='DelA'></todo-list>
+            <h3 class="nothing" v-if="addition == 0"> Aucune tâche</h3>
             <button class="CtaDel" v-if="addition > 1" v-on:click="deleteAll">Vider les Tâches</button>
         </div>
     </div>
 </template>
 
 <script>
-import newTodo from './new-todo.vue';
-import TodoList from './todo-list.vue';
+    import newTodo from './new-todo.vue';
+    import TodoList from './todo-list.vue';
     export default {
-  components: { 
-      newTodo, 
-      TodoList,
-      },
+        components: {
+            newTodo,
+            TodoList,
+        },
         name: 'TodoCard',
         props: {
             msg: String
         },
-        data () {
-            return{
-                task : [],
-                addition : 0,
+        data() {
+            return {
+                task: [],
+                addition: 0,
             }
         },
         computed: {
-            dataDate: function(){
+            dataDate: function () {
                 var date = new Date();
                 let days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"]
-                let months = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"]
-            
+                let months = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre",
+                    "Octobre", "Novembre", "Decembre"
+                ]
+
                 var dayNumber = date.getDate();
                 var actualDay = days[date.getDay()]
                 var actualMonth = months[date.getMonth()]
@@ -47,16 +50,12 @@ import TodoList from './todo-list.vue';
                 return actualDay + " " + dayNumber + " " + actualMonth + " "
             }
         },
-        methods : {
-            count(b){
-                this.addition=b
-            },
+        methods: {
             End(c) {
-                if(this.task[c].checked === false){
+                if (this.task[c].checked === false) {
                     this.task[c].checked = true
-                }else{
+                } else {
                     this.task[c].checked = false
-
                 }
             },
             Del(d) {
@@ -65,36 +64,52 @@ import TodoList from './todo-list.vue';
             },
             DelA(f) {
                 this.task.splice(f)
-                this.addition =0
+                this.addition = 0
             },
             Add(e) {
+                this.addition++
+                this.task.push({
+                    description: e,
+                    checked: false
+                })
                 
-                this.task.push({description: e, checked:false})
-                console.log(e)
             }
         }
     }
 </script>
 
 <style>
-.card {
-    background-color: white !important;
-    border-radius: 10px;
-}
-.card-header {
-    font-size: 22px;
-    justify-content: space-between;
-    padding: 15px;
-    color: black;
-}
-#card-title {
-    color: teal;
-}
-.card-content {
-    display: block;
-    justify-content: center;
+    .nothing {
+        margin: 20px 0;
+        width: 80;
+        background-color: rgba(255, 0, 0, 0.164);
+        border: none;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        font-size: 28px;
+        color: black;
+    }
+    .card {
+        background-color: white !important;
+        border-radius: 10px;
+    }
 
-}
+    .card-header {
+        font-size: 22px;
+        justify-content: space-between;
+        padding: 15px;
+        color: black;
+    }
+
+    #card-title {
+        color: teal;
+    }
+
+    .card-content {
+        display: block;
+        justify-content: center;
+
+    }
 
     .CtaDel {
         margin-top: 25px;

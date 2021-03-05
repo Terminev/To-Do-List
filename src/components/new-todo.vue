@@ -1,7 +1,7 @@
 <template>
     <div class="addtask">
-        <input v-model="taskName" name="add" placeholder="Nouvelle tâche...">
-        <i v-on:click="counter +=1; sendTask()" class="fas fa-plus-circle"></i>
+        <input v-model.trim="taskName" name="add" placeholder="Nouvelle tâche...">
+        <i v-on:click="sendTask()" class="fas fa-plus-circle"></i>
 
     </div>
 </template>
@@ -18,8 +18,12 @@
         },
         methods: {
             sendTask() {
+                if (this.taskName != ""){
+                this.counter+=1
                 this.$emit('sendTask', this.taskName)
                 this.$emit('counter', this.counter)
+                
+            }
             }
         },
     }
