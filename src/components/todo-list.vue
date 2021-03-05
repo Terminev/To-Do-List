@@ -4,12 +4,9 @@
             <li class="nametasks" v-for="(task, index) in task" :key="(task, index)">
                 <input type="checkbox" v-on:click='check(index)'>
                 <h3 v-bind:class="{'end':task.checked}">{{ task.description}}</h3>
-                <i class="fas fa-trash" v-on:click="addition +=-1;remover(index)"></i>
+                <i class="fas fa-trash" v-on:click="remover(index)"></i>
             </li>
         </ul>
-     <div v-if="addition > 1">
-            <button class="CtaDel" v-on:click="deleteAll">Vider les Tâches</button>
-    </div>
     </div>
 </template>
 <script>
@@ -52,17 +49,6 @@
     .nametasks input {
         width: 20px;
         height: 20px;
-    }
-
-    .CtaDel {
-        margin-top: 25px;
-        border: none;
-        background-color: green;
-        padding: 10px 20px;
-        font-size: 18px;
-        border-radius: 10px;
-        color: white;
-        font-weight: bold;
     }
 
     .fa-trash {

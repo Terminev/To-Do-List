@@ -3,11 +3,15 @@
         <div class="card-header">
             <h2>{{ dataDate }}</h2>
             <h2 id="card-title">VueJs Tutorial Todo List</h2>
-            <h2>{{ addition }} tâches</h2>
+
+            <h2 v-if="addition > 1">{{ addition }} tâches</h2>
+
+            <h2 v-else>{{ addition }} tâche</h2>
         </div>
         <div class="card-content">
             <new-todo @counter=count @sendTask='Add' ></new-todo>
             <todo-list :task="task" @endtask='End' @deletetask ='Del' @deleteall ='DelA'></todo-list>
+            <button class="CtaDel" v-if="addition > 1" v-on:click="deleteAll">Vider les Tâches</button>
         </div>
     </div>
 </template>
@@ -91,4 +95,15 @@ import TodoList from './todo-list.vue';
     justify-content: center;
 
 }
+
+    .CtaDel {
+        margin-top: 25px;
+        border: none;
+        background-color: green;
+        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+    }
 </style>
