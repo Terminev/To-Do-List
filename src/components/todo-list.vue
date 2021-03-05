@@ -20,8 +20,8 @@
             remover(index) {
                 this.$emit('deletetask', index)
             },
-            deleteAll(index) {
-                this.$emit('deleteall', index)
+            deleteAll() {
+                this.$emit('deleteAll')
             }
 
         }

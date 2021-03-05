@@ -10,9 +10,9 @@
         </div>
         <div class="card-content">
             <new-todo @sendTask='Add'></new-todo>
-            <todo-list :task="task" @endtask='End' @deletetask='Del' @deleteall='DelA'></todo-list>
+            <todo-list :task="task" @endtask='End' @deletetask='Del' @deleteAll='DelA'></todo-list>
             <h3 class="nothing" v-if="addition == 0"> Aucune tâche</h3>
-            <button class="CtaDel" v-if="addition > 1" v-on:click="deleteAll">Vider les Tâches</button>
+            <button class="CtaDel" v-if="addition > 1" v-on:click="DelA">Vider les Tâches</button>
         </div>
     </div>
 </template>
@@ -62,8 +62,8 @@
                 this.task.splice(d, 1)
                 this.addition--
             },
-            DelA(f) {
-                this.task.splice(f)
+            DelA() {
+                this.task = []
                 this.addition = 0
             },
             Add(e) {
@@ -72,7 +72,6 @@
                     description: e,
                     checked: false
                 })
-                
             }
         }
     }
