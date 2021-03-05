@@ -31,13 +31,13 @@
         color: green;
         font-size: 60px;
         padding-left: 15px;
-
     }
 
     input {
         border: solid grey 1px;
         height: 60px;
         padding-right: 15px;
+        text-align: center;
     }
 
     input::placeholder {
