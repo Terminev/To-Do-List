@@ -5,7 +5,7 @@
       <div class="hero-body">
         <div class="container has-text-centered">
           <h1 class="title">{{msg}}</h1>
-          <todo-list/>
+          <todo-card></todo-card>
         </div>
       </div>
 
@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import TodoList from './components/todo-card.vue'
+import TodoCard from './components/todo-card.vue'
 export default {
   name: 'app',
   components:{
-    TodoList
+    TodoCard
   },
   
   data () {
@@ -45,4 +45,5 @@ export default {
 </script>
 
 <style>
+
 </style>

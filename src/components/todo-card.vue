@@ -3,25 +3,30 @@
         <div class="card-header">
             <h2>{{ dataDate }}</h2>
             <h2 id="card-title">VueJs Tutorial Todo List</h2>
-            <h2>{{addition}} tâches</h2>
+            <h2>{{ addition }} tâches</h2>
         </div>
         <div class="card-content">
-            <new-todo @counter=count></new-todo>
+            <new-todo @counter=count @sendTask='Add' ></new-todo>
+            <todo-list :task="task" @endtask='End' @deletetask ='Del' @deleteall ='DelA'></todo-list>
         </div>
     </div>
 </template>
 
 <script>
 import newTodo from './new-todo.vue';
+import TodoList from './todo-list.vue';
     export default {
-  components: { newTodo },
-        name: 'TodoList',
+  components: { 
+      newTodo, 
+      TodoList,
+      },
+        name: 'TodoCard',
         props: {
             msg: String
         },
         data () {
             return{
-                tasks : [],
+                task : [],
                 addition : 0,
             }
         },
@@ -40,8 +45,28 @@ import newTodo from './new-todo.vue';
         },
         methods : {
             count(b){
-                console.log(b)
                 this.addition=b
+            },
+            End(c) {
+                if(this.task[c].checked === false){
+                    this.task[c].checked = true
+                }else{
+                    this.task[c].checked = false
+
+                }
+            },
+            Del(d) {
+                this.task.splice(d, 1)
+                this.addition--
+            },
+            DelA(f) {
+                this.task.splice(f)
+                this.addition =0
+            },
+            Add(e) {
+                
+                this.task.push({description: e, checked:false})
+                console.log(e)
             }
         }
     }
@@ -51,7 +76,6 @@ import newTodo from './new-todo.vue';
 .card {
     background-color: white !important;
     border-radius: 10px;
-    font-family: Roboto;
 }
 .card-header {
     font-size: 22px;
@@ -63,7 +87,7 @@ import newTodo from './new-todo.vue';
     color: teal;
 }
 .card-content {
-    display: flex;
+    display: block;
     justify-content: center;
 
 }
