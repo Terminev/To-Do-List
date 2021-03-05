@@ -2,7 +2,6 @@
     <div class="addtask">
         <input v-model.trim="taskName" name="add" placeholder="Nouvelle tâche...">
         <i v-on:click="sendTask()" class="fas fa-plus-circle"></i>
-
     </div>
 </template>
 
@@ -42,6 +41,7 @@
         height: 60px;
         padding-right: 15px;
         text-align: center;
+        font-size: 16px;
     }
 
     input::placeholder {
